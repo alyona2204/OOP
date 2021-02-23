@@ -36,14 +36,10 @@ class Student:
             x = sum(value) / len(value)
             return x
 
-    def comparison(self, other):
+    def __lt__(self, other):
         if isinstance(other, Student):
-            if other.average() < self.average():
-                return f'У {other.name} {other.surname} средний балл ниже, чем у {self.name} {self.surname}'
-            elif other.average() == self.average():
-                return f'У {other.name} {other.surname} такой же средний балл, как и у {self.name} {self.surname}'
-            else:
-                return 'У {other.name} {other.surname} средний балл выше, чем у {self.name} {self.surname}'
+            print('Сравнение студентов')
+        return self.average() < other.average()
 
     def __str__(self):
         nl = '\n'
@@ -88,17 +84,10 @@ class Lecturer(Mentor):
             x = sum(value) / len(value)
             return x
 
-
-    def comparison_lector(self, other):
+    def __lt__(self, other):
         if isinstance(other, Lecturer):
-            if other.average_lector() < self.average_lector():
-                return f'У лектора {other.name} {other.surname} средний балл ниже, чем у {self.name} {self.surname}'
-            elif other.average_lector() == self.average_lector():
-                return f'У лектора {other.name} {other.surname} такой же средний балл, как и у {self.name} {self.surname}'
-            else:
-                return f'У лектора {other.name} {other.surname} средний балл выше, чем у {self.name} {self.surname}'
-
-
+            print('Сравнение лекторов')
+        return self.average_lector() < other.average_lector()
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -147,7 +136,7 @@ reviewer_2.revie_students(student_1, 'Git', 9)
 
 reviewer_1.revie_students(student_2, 'Python', 10)
 reviewer_1.revie_students(student_2, 'Python', 9)
-reviewer_1.revie_students(student_2, 'Python', 10)
+reviewer_1.revie_students(student_2, 'Python', 9)
 reviewer_1.revie_students(student_2, 'Python', 10)
 
 lector_1 = Lecturer('Lector', 'toPython')
@@ -161,7 +150,7 @@ student_1.revie_lecturer(lector_1, 'Python', 10)
 student_1.revie_lecturer(lector_1, 'Python', 9)
 student_1.revie_lecturer(lector_1, 'Python', 10)
 
-student_1.revie_lecturer(lector_2, 'Git', 9)
+student_1.revie_lecturer(lector_2, 'Git', 10)
 student_1.revie_lecturer(lector_2, 'Git', 10)
 student_1.revie_lecturer(lector_2, 'Git', 10)
 student_1.revie_lecturer(lector_2, 'Git', 10)
@@ -181,5 +170,5 @@ print(student_2.average_rating('Git'))
 print(lector_2.average_rating_lector('Git'))
 print(lector_1.average_rating_lector('Python'))
 print(lector_2.average_rating_lector('Python'))
-print(student_1.comparison(student_2))
-print(lector_1.comparison_lector(lector_2))
+print(student_2<student_1)
+print(lector_2<lector_1)
